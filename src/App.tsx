@@ -126,7 +126,6 @@ function App() {
   };
 
   const updateAsset = (updatedAsset: any) => {
-    console.log(updatedAsset);
     const oldAsset = data.find((_asset: any) => _asset.id === updatedAsset.id);
     const diff = oldAsset.value - updatedAsset.value;
     const cash = data.find((_asset: any) => _asset.type === 0);
