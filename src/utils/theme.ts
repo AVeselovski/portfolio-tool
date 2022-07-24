@@ -1,8 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
-// TODO: blur all backdrops (e.g. MUI docs modal)
-
 declare module "@mui/material/styles" {
   interface Theme {
     drawerWidth: number;
