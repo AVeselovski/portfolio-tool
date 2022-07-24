@@ -46,12 +46,17 @@ const AssetChart = ({ data, tab, total }: Props) => {
             top: "50%",
             transform: "translate(-50%, -50%)",
             zIndex: 0,
+            strong: {
+              display: "inline-block",
+              textAlign: "right",
+              width: "40px",
+            },
           }}
         >
           {data.grouped.map((g: any, i: number) => {
             const percentage = (g.value / total) * 100;
             return (
-              <Typography key={i}>
+              <Typography key={i} sx={{ fontSize: "0.85rem" }}>
                 <strong>{percentage.toFixed(0)}%</strong> {g.name}
               </Typography>
             );

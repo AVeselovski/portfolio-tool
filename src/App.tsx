@@ -191,7 +191,7 @@ function App() {
 
         <AssetModal
           asset={asset}
-          availableFunds={availableFunds}
+          availableFunds={asset ? asset.value + availableFunds : availableFunds}
           isOpen={!!asset || isAssetModalOpen}
           onClose={handleCloseAssetModal}
           onSubmit={handleSaveAsset}
