@@ -1,8 +1,8 @@
 export const TYPES = [
   { key: 0, value: "Cash" },
-  { key: 1, value: "Stock" },
-  { key: 2, value: "Fund" },
-  { key: 3, value: "ETF" },
+  { key: 1, value: "Fund" },
+  { key: 2, value: "ETF" },
+  { key: 3, value: "Stock" },
   { key: 4, value: "Cryptocurrency" },
   { key: 5, value: "Commodities" },
 ];
@@ -34,9 +34,9 @@ export const REGIONS = [
 
 export const COLORS: any = {
   0: "#BDBDBD",
-  1: "#9575CD",
-  2: "#81C784",
-  3: "#AED581",
+  1: "#81C784",
+  2: "#AED581",
+  3: "#9575CD",
   4: "#7986CB",
   5: "#FFD54F",
 };

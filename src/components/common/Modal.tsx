@@ -11,7 +11,7 @@ import { CloseRounded } from "../icons";
 const StyledDialog = styled(MuiDialog)<DialogProps>(({ theme }) => ({
   [`.${dialogClasses.container}`]: {
     alignItems: "flex-start",
-    marginBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(2),
     paddingTop: theme.spacing(2),
   },
   [`.${dialogClasses.paper}`]: {
@@ -45,7 +45,8 @@ const Modal: FC<Props> = ({ children, isOpen = false, onClose = () => {}, title 
       closeAfterTransition
       onClose={handleClose}
       open={isOpen}
-      scroll="paper"
+      scroll="body"
+      sx={{ marginBottom: 2 }}
       TransitionComponent={Transition}
     >
       <Box

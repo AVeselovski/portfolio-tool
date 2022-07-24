@@ -49,7 +49,6 @@ const AssetItem = ({ item, onDelete = () => {}, onEdit = () => {}, total }: Asse
         aria-expanded={isMenuOpen ? "true" : undefined}
         aria-haspopup="true"
         aria-label="action menu"
-        edge="end"
         id="action-menu-button"
         onClick={handleMenuOpen}
       >
@@ -74,10 +73,16 @@ const AssetItem = ({ item, onDelete = () => {}, onEdit = () => {}, total }: Asse
     </>
   );
 
+  const spacer = <Box sx={{ width: 5 }} />;
+
   return (
     <ListItem
-      secondaryAction={actionsMenu}
-      sx={{ borderBottom: "1px solid", borderColor: "grey.300" }}
+      secondaryAction={item.type !== 0 ? actionsMenu : spacer}
+      sx={{
+        borderBottom: "1px solid",
+        borderColor: "grey.300",
+        "&:first-of-type": { borderTop: "1px solid", borderColor: "grey.300" },
+      }}
     >
       <Box
         sx={{
@@ -88,9 +93,13 @@ const AssetItem = ({ item, onDelete = () => {}, onEdit = () => {}, total }: Asse
       >
         <ListItemText primary={item.name} secondary={SECTORS[item.sector]} />
         <ListItemText
-          primary={`${formatCurrency(item.value)} ${percentage.toFixed(0)}%`}
+          primary={
+            <strong>
+              {formatCurrency(item.value)} {percentage.toFixed(0)}%
+            </strong>
+          }
           secondary={TYPES[item.type]}
-          sx={{ mr: 1, textAlign: "right" }}
+          sx={{ mr: 3, textAlign: "right" }}
         />
       </Box>
     </ListItem>
@@ -101,7 +110,7 @@ type Props = any;
 
 const AssetList = ({ data, onDelete, onEdit, total }: Props) => {
   return (
-    <Paper sx={{ maxHeight: "calc(100vh - 200px)", overflow: "scroll", px: 0, py: 1 }}>
+    <Paper sx={{ maxHeight: "calc(100vh - 180px)", overflow: "scroll", px: 0, py: 1 }}>
       <Box sx={{ display: "flex" }}>
         <List dense sx={{ width: "100%" }}>
           {data.map((asset: any, i: number) => (

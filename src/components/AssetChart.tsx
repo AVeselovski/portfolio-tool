@@ -1,70 +1,12 @@
-import { useState } from "react";
-import { Cell, Label, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 import { formatCurrency } from "utils/numbers";
-import {
-  TYPES as TYPES_ARR,
-  SECTORS as SECTORS_ARR,
-  REGIONS as REGIONS_ARR,
-  COLORS,
-} from "utils/constants";
+import { COLORS } from "utils/constants";
 
-import { Box, TabNav, Typography } from "./common";
-
-const TYPES = TYPES_ARR.reduce(
-  (obj: any, item: any) => Object.assign(obj, { [item.key]: item.value }),
-  {}
-);
-
-const SECTORS = SECTORS_ARR.reduce(
-  (obj: any, item: any) => Object.assign(obj, { [item.key]: item.value }),
-  {}
-);
-
-const REGIONS = REGIONS_ARR.reduce(
-  (obj: any, item: any) => Object.assign(obj, { [item.key]: item.value }),
-  {}
-);
-
-const SORT_NAMES: any = {
-  type: TYPES,
-  sector: SECTORS,
-  region: REGIONS,
-};
-
-const SORT: { [key: number]: string } = {
-  0: "type",
-  1: "sector",
-  2: "region",
-};
+import { Box, Typography } from "./common";
 
 const getColor = (key: number, value: any) => {
   return key === 0 ? COLORS[value.type] : "#BDBDBD";
-};
-
-const getName = (key: string, value: number) => {
-  return SORT_NAMES[key][value];
-};
-
-const formatData = (data: any, sortedBy: number) => {
-  const sorter = SORT[sortedBy];
-  const sorted = data.sort((a: any, b: any) => a[sorter] - b[sorter]);
-
-  const grouped = sorted
-    .reduce((reduced: any[], current: any, index: number) => {
-      const dataObjName = getName(sorter, current[sorter]);
-      const dataObj = { ...current, name: dataObjName, value: current.value };
-
-      if (index > 0 && current[sorter] === reduced[index - 1][sorter]) {
-        dataObj.value = current.value + reduced[index - 1].value;
-        reduced[index - 1] = null;
-      }
-
-      return [...reduced, dataObj];
-    }, [])
-    .filter(Boolean);
-
-  return [sorted, grouped];
 };
 
 const CustomTooltip = ({ active, payload, total }: any, x: any) => {
@@ -78,7 +20,6 @@ const CustomTooltip = ({ active, payload, total }: any, x: any) => {
           boxShadow: "3",
           px: 2,
           py: 1,
-          // transform: "rotate(0deg)",
         }}
       >
         <Typography sx={{ fontWeight: 600 }}>{payload[0].name}</Typography>
@@ -95,8 +36,6 @@ const CustomTooltip = ({ active, payload, total }: any, x: any) => {
 type Props = any;
 
 const AssetChart = ({ data, tab, total }: Props) => {
-  const [sortedData, groupedData] = formatData(data, tab);
-
   return (
     <Box sx={{ display: "flex", flexDirection: "column", position: "relative" }}>
       <Box sx={{ position: "relative", height: "500px", width: "100%" }}>
@@ -109,7 +48,7 @@ const AssetChart = ({ data, tab, total }: Props) => {
             zIndex: 0,
           }}
         >
-          {groupedData.map((g: any, i: number) => {
+          {data.grouped.map((g: any, i: number) => {
             const percentage = (g.value / total) * 100;
             return (
               <Typography key={i}>
@@ -123,15 +62,15 @@ const AssetChart = ({ data, tab, total }: Props) => {
             <Pie
               cx="50%"
               cy="50%"
-              data={sortedData}
+              data={data.sorted}
               dataKey="value"
               fill="#8884d8"
               innerRadius={150}
               outerRadius={200}
             >
-              {sortedData.map((_entry: any, index: any) => (
+              {data.sorted.map((_entry: any, index: any) => (
                 <Cell
-                  fill={sortedData[index].color ?? COLORS[sortedData[index].type]}
+                  fill={data.sorted[index].color ?? COLORS[data.sorted[index].type]}
                   key={`1-cell-${index}`}
                 />
               ))}
@@ -139,14 +78,14 @@ const AssetChart = ({ data, tab, total }: Props) => {
             <Pie
               cx="50%"
               cy="50%"
-              data={groupedData}
+              data={data.grouped}
               dataKey="value"
               fill="#82ca9d"
               innerRadius={210}
               outerRadius={225}
             >
-              {groupedData.map((_entry: any, index: any) => (
-                <Cell fill={getColor(tab, groupedData[index])} key={`2-cell-${index}`} />
+              {data.grouped.map((_entry: any, index: any) => (
+                <Cell fill={getColor(tab, data.grouped[index])} key={`2-cell-${index}`} />
               ))}
             </Pie>
             <Tooltip content={<CustomTooltip total={total} />} />
