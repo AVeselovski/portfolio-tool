@@ -1,6 +1,6 @@
 # Portfolio Tool
 
-An investement portfolio visualization tool.
+An investement portfolio visualization tool. **PoC**.
 
 ## Available Scripts
 
