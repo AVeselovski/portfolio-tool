@@ -99,7 +99,7 @@ const AssetChart = ({ data, tab, total }: Props) => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", position: "relative" }}>
-      <Box sx={{ position: "relative", height: "600px", width: "100%" }}>
+      <Box sx={{ position: "relative", height: "500px", width: "100%" }}>
         <Box
           sx={{
             position: "absolute",

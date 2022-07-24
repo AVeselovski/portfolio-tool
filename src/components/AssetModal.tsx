@@ -113,7 +113,7 @@ const AssetModal = ({
             <Select
               id="asset-type"
               onChange={(e) => setType(Number(e.target.value))}
-              size="medium"
+              size="small"
               value={type}
             >
               {TYPES.map((t) => (
@@ -128,7 +128,7 @@ const AssetModal = ({
             <Select
               id="asset-sector"
               onChange={(e) => setSector(Number(e.target.value))}
-              size="medium"
+              size="small"
               value={sector}
             >
               {SECTORS.map((t) => (
@@ -143,7 +143,7 @@ const AssetModal = ({
             <Select
               id="asset-region"
               onChange={(e) => setRegion(Number(e.target.value))}
-              size="medium"
+              size="small"
               value={region}
             >
               {REGIONS.map((t) => (

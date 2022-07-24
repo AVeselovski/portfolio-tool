@@ -20,7 +20,7 @@ const DepositModal = ({
 }) => {
   const [amount, setAmount] = useState(totalFunds);
 
-  const submitDisabled = !amount || amount < 1000;
+  const submitDisabled = (typeof amount === "undefined" || amount === null) && amount < 0;
 
   const clearForm = () => {
     setAmount(totalFunds);
@@ -34,9 +34,7 @@ const DepositModal = ({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (amount && amount > 1000) {
-      onSubmit(amount);
-    }
+    onSubmit(amount);
   };
 
   return (
@@ -50,7 +48,7 @@ const DepositModal = ({
               id="deposit-amount"
               InputProps={{
                 inputProps: {
-                  min: 1000,
+                  min: 0,
                 },
               }}
               onChange={(e) => setAmount(Number(e.target.value))}
