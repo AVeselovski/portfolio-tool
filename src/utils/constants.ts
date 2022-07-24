@@ -24,12 +24,17 @@ export const SECTORS = [
 
 export const REGIONS = [
   { key: 0, value: "-" },
-  { key: 1, value: "USA" },
-  { key: 2, value: "Europe" },
-  { key: 4, value: "Asia" },
-  { key: 5, value: "Canada" },
-  { key: 6, value: "Latin America" },
-  { key: 7, value: "Africa" },
+  { key: 1, value: "North America" },
+  { key: 2, value: "USA" },
+  { key: 3, value: "Canada" },
+  { key: 4, value: "Europe" },
+  { key: 5, value: "Denmark" },
+  { key: 6, value: "Finland" },
+  { key: 7, value: "Norway" },
+  { key: 8, value: "Sweden" },
+  { key: 9, value: "Asia" },
+  { key: 10, value: "Latin America" },
+  { key: 11, value: "Africa" },
 ];
 
 export const COLORS: any = {
