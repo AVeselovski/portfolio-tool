@@ -13,6 +13,24 @@ declare module "@mui/material/styles" {
 
 const theme = createTheme({
   drawerWidth: 240,
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: (theme) => ({
+        "::-webkit-scrollbar": {
+          width: "5px",
+        },
+        /* Handle */
+        "::-webkit-scrollbar-thumb": {
+          borderRadius: "5px",
+          background: "#777",
+        },
+        /* Handle on hover */
+        "::-webkit-scrollbar-thumb:hover": {
+          background: "#555",
+        },
+      }),
+    },
+  },
 });
 
 export { theme, ThemeProvider, CssBaseline };
